@@ -74,6 +74,8 @@ class Property: public Square
         color = other.color;
         prop_price = other.prop_price;
         house_price = other.house_price;
+        id_proprietar = other.id_proprietar;
+        nr_case = other.nr_case;
         for(int i = 0;i<6;i++)
             rent[i] = other.rent[i];
         return *this;
