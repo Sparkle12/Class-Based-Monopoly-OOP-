@@ -288,12 +288,15 @@ class Player
     {
         //CUMPARA PROPRIETATEA PE CARE JUCATORUL SE AFLA
         Property *p;
-        if((p = dynamic_cast<Property*>(b[pozitie])))
+        p = dynamic_cast<Property*>(b[pozitie]);
+        if(p)
         {
             this->add_money(-p->price());
             p->set_prop(player_id);
             proprietati.push_back(p);
         }
+        else
+            cout<<"UPS SOMETHING WENT WRONG"<<endl;
     }
 
 
@@ -384,8 +387,10 @@ int main()
     for(Player i:jucatori2)
         {
             Effect *e;
-           if((e = dynamic_cast<Effect*>(table2[i.position()])))
+            e = dynamic_cast<Effect*>(table2[i.position()]);
+           if(e)
                i.do_effect(*e,table2);
+           i.buy(table2);
             cout<<i<<endl; 
         }
 
@@ -402,7 +407,8 @@ int main()
     jucatori[0].buy_house(jucatori[0][0]);
     cout<<dynamic_cast<Property*>(table[1])->houses()<<endl;
     jucatori[1].move(table);
-    if((p = dynamic_cast<Property*>(table[jucatori[1].position()])))
+    p = dynamic_cast<Property*>(table[jucatori[1].position()]);
+    if(p)
         if((*p).id() != 0 && (*p).id() != jucatori[1].id())
             jucatori[1].pay(jucatori[(*p).id() -1],table);
     
