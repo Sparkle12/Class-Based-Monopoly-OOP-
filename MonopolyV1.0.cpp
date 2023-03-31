@@ -253,7 +253,7 @@ class Player
     friend ostream& operator<<(ostream& out,const Player& p)
     {
         out<<"{"<<p.player_id<<","<<p.money<<","<<p.pozitie<<",[";
-        for(const auto const i: p.proprietati)
+        for(const Property* i: p.proprietati)
             out<<*i<<" ";
         out<<"]}";
         return out;
