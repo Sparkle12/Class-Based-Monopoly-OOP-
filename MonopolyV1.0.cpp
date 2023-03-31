@@ -34,14 +34,13 @@ class Property: public Square
     
     explicit Property(int color = 0, int prop_price = 0, int house_price = 0,int id = 0,vector<int> rent = {0,0,0,0,0,0},int nr_case = 0):color(color),prop_price(prop_price),house_price(house_price),id_proprietar(id),nr_case(nr_case),rent(std::move(rent)){}
 
-    Property(Property &p)
+    Property(const Property &p):rent(p.rent)
     {
         color = p.color;
         prop_price = p.prop_price;
         house_price = p.house_price;
         id_proprietar = p.id_proprietar;
         nr_case = p.nr_case;
-        rent = p.rent;
     }
 
     friend ostream& operator<<(ostream& out,const Property& sq)
@@ -205,18 +204,18 @@ class Board
 
     friend ostream& operator<<(ostream& out,const Board& b)
     {
-        Property* p;
+
         Effect* e;
         for(auto i : b.tabla)
-            if((p = dynamic_cast<Property*>(i)))
-            {
+        {
+            Property* p;
+            if ((p = dynamic_cast<Property *>(i))) {
                 out << *p << endl;
+            } else {
+                e = dynamic_cast<Effect *>(i);
+                out << *e << endl;
             }
-            else
-            {
-                e = dynamic_cast<Effect*>(i);
-                out<<*e<<endl;
-            }
+        }
         return out;
     }
 
@@ -254,7 +253,7 @@ class Player
     friend ostream& operator<<(ostream& out,const Player& p)
     {
         out<<"{"<<p.player_id<<","<<p.money<<","<<p.pozitie<<",[";
-        for(auto i: p.proprietati)
+        for(const auto i: p.proprietati)
             out<<*i<<" ";
         out<<"]}";
         return out;
@@ -264,7 +263,7 @@ class Player
     Property* operator[](int i)
     {
         //RETURNEAZA POINTER-UL SPRE PROPRIETATEA DE PE POZITIA I DIN VECTORUL PROPRIETATI
-        return (Property*)this->proprietati[i];
+        return this->proprietati[i];
     }
 
     void move(Board &b,int step = 0)
@@ -374,7 +373,6 @@ int main()
 
 
     Property *p;
-    Effect *e;
     vector<Player> jucatori;
     vector<Player> jucatori2;
     Board table({new Effect(),new Property(1,100,50,1,{10,20,30,40,50,600})});
@@ -389,6 +387,7 @@ int main()
 
     for(Player i:jucatori2)
         {
+            Effect *e;
            if((e = dynamic_cast<Effect*>(table2[i.position()])))
                i.do_effect(*e,table2);
             cout<<i<<endl; 
