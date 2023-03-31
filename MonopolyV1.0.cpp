@@ -186,10 +186,10 @@ class Board
 
 
     explicit Board(vector<Square*> t =
-    {new Effect(0),
+    vector<Square*>({new Effect(0),
      new Property(1, 50, 25, 0, {5, 10, 15, 20, 25, 40}),
      new Property(1, 60, 25, 0, {7, 12, 17, 22, 27, 50}),
-     new Effect(3)})
+     new Effect(3)}))
      :tabla(std::move(t)){}
 
 
