@@ -1,4 +1,5 @@
 #include <iostream>
+#include <utility>
 #include <vector>
 #include <cstdlib>
 #include <ctime>
@@ -15,7 +16,7 @@ class Square
     public:
     
     
-    virtual ~Square(){}
+    virtual ~Square()= default;
 };
 
 class Property: public Square
@@ -32,7 +33,7 @@ class Property: public Square
     public:
     
     
-    Property(int color = 0, int prop_price = 0, int house_price = 0,int id = 0,vector<int> rent = {0,0,0,0,0,0},int nr_case = 0):color(color),prop_price(prop_price),rent(rent),house_price(house_price),id_proprietar(id),nr_case(nr_case){}
+    explicit Property(int color = 0, int prop_price = 0, int house_price = 0,int id = 0,vector<int> rent = {0,0,0,0,0,0},int nr_case = 0):color(color),prop_price(prop_price),house_price(house_price),id_proprietar(id),nr_case(nr_case),rent(std::move(rent)){}
 
     Property(Property &p)
     {
@@ -69,19 +70,20 @@ class Property: public Square
 
     
     
-    void operator=(Property other)
+    Property& operator=( const Property &other)
     {
         color = other.color;
         prop_price = other.prop_price;
         house_price = other.house_price;
         for(int i = 0;i<6;i++)
             rent[i] = other.rent[i];
+        return *this;
 
     }
 
 
 
-    int price()
+    [[nodiscard]] int price () const
     {
         //RETURNEAZA PRETUL PROPRIETATII
         return prop_price;
@@ -95,28 +97,28 @@ class Property: public Square
     }
 
 
-    int id()
+    [[nodiscard]] int id() const
     {
         //RETURNEAZA PROPRIETARUL PROPRIETATII
         return id_proprietar;
     }
 
 
-    int houses()
+    [[nodiscard]] int houses() const
     {
         //RETURNEAZA NUMARUL DE CASE DE PE PROPRIETATE
         return nr_case;
     }
 
 
-    int out_rent(int nr_case)
+    int out_rent(int nr)
     {
         //RETURNEAZA SUMA DE PLATIT CA SI CHIRIE CU UN ANUMIT NUMAR DE CASE PE PROPRIETATE
-        return rent[nr_case];
+        return rent[nr];
     }
 
 
-    int out_house_price()
+    [[nodiscard]] int out_house_price() const
     {
         //RETURNEAZA PRETUL UNEI CASE
         return house_price;
@@ -142,7 +144,7 @@ class Effect:public Square
     public:
     
     
-    Effect(int effect_id = 0):effect_id(effect_id){}
+    explicit Effect(int effect_id = 0):effect_id(effect_id){}
 
 
     friend ostream& operator<<(ostream& out,const Effect& ef)
@@ -159,12 +161,13 @@ class Effect:public Square
     }
     
     
-    void operator=(Effect ef)
+    Effect& operator=(const Effect &ef)
     {
         effect_id = ef.effect_id;
+        return *this;
     }
 
-    int id_effect()
+    [[nodiscard]] int id_effect() const
     {
         return effect_id;
     }
@@ -182,12 +185,12 @@ class Board
     public:
 
 
-    Board(vector<Square*> tabla = 
+    explicit Board(vector<Square*> tabla =
     {new Effect(0),
      new Property(1, 50, 25, 0, {5, 10, 15, 20, 25, 40}),
      new Property(1, 60, 25, 0, {7, 12, 17, 22, 27, 50}),
      new Effect(3)})
-     :tabla(tabla){}
+     :tabla(std::move(tabla)){}
 
 
 
@@ -201,11 +204,13 @@ class Board
 
     friend ostream& operator<<(ostream& out,const Board& b)
     {
-        Property* p = nullptr;
-        Effect* e = nullptr;
+        Property* p;
+        Effect* e;
         for(auto i : b.tabla)
-            if(p = dynamic_cast<Property*>(i))
-                out<<*p<<endl;
+            if((p = dynamic_cast<Property*>(i)))
+            {
+                out << *p << endl;
+            }
             else
             {
                 e = dynamic_cast<Effect*>(i);
@@ -242,10 +247,10 @@ class Player
 
     public:
 
-    Player(int player_id = 0,int money = 0,int poz = 0,vector<Property*> proprietati = {}):player_id(player_id),money(money),pozitie(poz),proprietati(proprietati){}
+    explicit Player(int player_id = 0,int money = 0,int poz = 0,vector<Property*> proprietati = {}):money(money),player_id(player_id),pozitie(poz),proprietati(std::move(proprietati)){}
    
    
-    friend ostream& operator<<(ostream& out,const Player p)
+    friend ostream& operator<<(ostream& out,const Player& p)
     {
         out<<"{"<<p.player_id<<","<<p.money<<","<<p.pozitie<<",[";
         for(auto i: p.proprietati)
@@ -287,7 +292,7 @@ class Player
     {
         //CUMPARA PROPRIETATEA PE CARE JUCATORUL SE AFLA
         Property *p;
-        if(p = dynamic_cast<Property*>(b[pozitie]))
+        if((p = dynamic_cast<Property*>(b[pozitie])))
         {
             this->add_money(-p->price());
             p->set_prop(player_id);
@@ -296,14 +301,14 @@ class Player
     }
 
 
-    int position()
+    [[nodiscard]] int position() const
     {
         //RETURNEAZA POZITIA
         return pozitie;
     }
 
 
-    int id()
+    [[nodiscard]] int id() const
     {
         //RETURNEAZA IDENTIFICATORUL JUCATORULUI
         return player_id;
@@ -326,7 +331,7 @@ class Player
 
     }
 
-    void do_effect(Effect e,Board &b)
+    void do_effect(const Effect& e,Board &b)
     {
         int effect_id = e.id_effect();
         if(effect_id == 0)
@@ -362,7 +367,7 @@ class Player
 
 int main()
 {
-    srand(time(0));
+    srand(time(nullptr));
     
     //DECLARARI
 
@@ -372,8 +377,8 @@ int main()
     vector<Player> jucatori;
     Board table({new Effect(),new Property(1,100,50,1,{10,20,30,40,50,600})});
     //Board table2({new Effect(),new Effect(1)});
-    jucatori.push_back(Player(1,500,1));
-    jucatori.push_back(Player(2,500,0));
+    jucatori.emplace_back(1,500,1);
+    jucatori.emplace_back(2,500,0);
 
 
     //COD TEST
@@ -398,7 +403,7 @@ int main()
     jucatori[0].buy_house(jucatori[0][0]);
     cout<<dynamic_cast<Property*>(table[1])->houses()<<endl;
     jucatori[1].move(table);
-    if(p = dynamic_cast<Property*>(table[jucatori[1].position()]))
+    if((p = dynamic_cast<Property*>(table[jucatori[1].position()])))
         if((*p).id() != 0 && (*p).id() != jucatori[1].id())
             jucatori[1].pay(jucatori[(*p).id() -1],table);
     
