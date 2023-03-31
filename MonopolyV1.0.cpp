@@ -178,18 +178,14 @@ class Board
 {
     // TABLA ESTE UN VECTOR DE PROPRIETATI SI EFECTE TABLA[i] TINUTE SUB FORMA DE Square*(trb fct dynamic_cast ca sa vezi daca e Property sau Effect) SCOATE ELEMENTUL DE PE POZITIA i DIN VECTOR
     
-    
+    static vector<Square*> default_board;
     vector<Square*> tabla;
 
 
     public:
 
 
-    explicit Board(vector<Square*> t =
-    vector<Square*>({new Effect(0),
-     new Property(1, 50, 25, 0, {5, 10, 15, 20, 25, 40}),
-     new Property(1, 60, 25, 0, {7, 12, 17, 22, 27, 50}),
-     new Effect(3)}))
+    explicit Board(vector<Square*> t = default_board)
      :tabla(std::move(t)){}
 
 
@@ -236,7 +232,7 @@ class Board
 
 
 };
-
+vector<Square*> Board::default_board = {new Effect(0),new Property(1, 50, 25, 0, {5, 10, 15, 20, 25, 40}),new Property(1, 60, 25, 0, {7, 12, 17, 22, 27, 50}),new Effect(3)};
 class Player
 {
     // JUCATORUL ARE UN ID, POZITIE ,SUMA DE BANI SI UN VECTOR DE PROPRIETATI. EL SE POATE MUTA PE TABLA SI POATE CUMPARA PROPRIETATI(NU AI CHECK DACA ARE DESTUI BANI)
