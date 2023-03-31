@@ -3,7 +3,6 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
-#include <SFML/Graphics.hpp>
 using namespace std;
 
 
@@ -231,7 +230,7 @@ class Board
     int size()
     {
         //RETURNEAZA NUMARUL DE PATRATE DIN TABLA
-        return tabla.size();
+        return int(tabla.size());
     }
 
 
@@ -375,21 +374,24 @@ int main()
     Property *p;
     Effect *e;
     vector<Player> jucatori;
+    vector<Player> jucatori2;
     Board table({new Effect(),new Property(1,100,50,1,{10,20,30,40,50,600})});
-    //Board table2({new Effect(),new Effect(1)});
+    Board table2({new Effect(),new Effect(1)});
     jucatori.emplace_back(1,500,1);
     jucatori.emplace_back(2,500,0);
+    jucatori2.emplace_back(1,500,1);
+    jucatori2.emplace_back(2,500,0);
 
 
     //COD TEST
-    /*
-    for(Player i:jucatori)
+
+    for(Player i:jucatori2)
         {
-           if(e = dynamic_cast<Effect*>(table2[i.position()]))
+           if((e = dynamic_cast<Effect*>(table2[i.position()])))
                i.do_effect(*e,table2);
             cout<<i<<endl; 
         }
-    */
+
 
 
 
