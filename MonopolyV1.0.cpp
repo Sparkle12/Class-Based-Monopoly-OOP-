@@ -174,21 +174,21 @@ class Effect:public Square
 
 };
 
-class Board
-{
+class Board {
     // TABLA ESTE UN VECTOR DE PROPRIETATI SI EFECTE TABLA[i] TINUTE SUB FORMA DE Square*(trb fct dynamic_cast ca sa vezi daca e Property sau Effect) SCOATE ELEMENTUL DE PE POZITIA i DIN VECTOR
-    
-    static vector<Square*> default_board;
-    vector<Square*> tabla;
+
+    vector<Square *> tabla = {new Effect(0), new Property(1, 50, 25, 0, {5, 10, 15, 20, 25, 40}),
+                              new Property(1, 60, 25, 0, {7, 12, 17, 22, 27, 50}), new Effect(3)};
 
 
-    public:
+public:
 
+    Board() = default;
 
-    explicit Board(vector<Square*> t = default_board)
-     :tabla(std::move(t)){}
+    explicit Board(vector<Square *> t)
+            : tabla(std::move(t)) {}
 
-
+    Board(Board &b) : tabla(std::move(b.tabla)) {}
 
     ~Board()
     {
@@ -197,6 +197,7 @@ class Board
 
     }
 
+    Board &operator=(const Board &b) = default;
 
     friend ostream& operator<<(ostream& out,const Board& b)
     {
@@ -232,28 +233,37 @@ class Board
 
 
 };
-vector<Square*> Board::default_board = {new Effect(0),new Property(1, 50, 25, 0, {5, 10, 15, 20, 25, 40}),new Property(1, 60, 25, 0, {7, 12, 17, 22, 27, 50}),new Effect(3)};
-class Player
-{
+
+
+class Player {
     // JUCATORUL ARE UN ID, POZITIE ,SUMA DE BANI SI UN VECTOR DE PROPRIETATI. EL SE POATE MUTA PE TABLA SI POATE CUMPARA PROPRIETATI(NU AI CHECK DACA ARE DESTUI BANI)
-    int money,player_id,pozitie;
+    int money, player_id, pozitie;
 
 
-    vector<Property*> proprietati;
+    vector<Property *> proprietati;
 
-    public:
+public:
 
-    explicit Player(int player_id = 0,int money = 0,int poz = 0,vector<Property*> proprietati = {}):money(money),player_id(player_id),pozitie(poz),proprietati(std::move(proprietati)){}
-   
-   
-    friend ostream& operator<<(ostream& out,const Player& p)
-    {
-        out<<"{"<<p.player_id<<","<<p.money<<","<<p.pozitie<<",[";
-        for(const Property* i: p.proprietati)
-            out<<*i<<" ";
-        out<<"]}";
+    explicit Player(int player_id = 0, int money = 0, int poz = 0, vector<Property *> proprietati = {}) : money(money),
+                                                                                                          player_id(
+                                                                                                                  player_id),
+                                                                                                          pozitie(poz),
+                                                                                                          proprietati(
+                                                                                                                  std::move(
+                                                                                                                          proprietati)) {}
+
+    Player(const Player &p) = default;
+
+    Player &operator=(const Player &p) = default;
+
+    friend ostream &operator<<(ostream &out, const Player &p) {
+        out << "{" << p.player_id << "," << p.money << "," << p.pozitie << ",[";
+        for (const Property *i: p.proprietati)
+            out << *i << " ";
+        out << "]}";
         return out;
     }
+
 
 
     Property* operator[](int i)
@@ -364,33 +374,30 @@ class Player
 
 };
 
-int main()
-{
+int main() {
     srand(time(nullptr));
-    
+
     //DECLARARI
 
 
     Property *p;
     vector<Player> jucatori;
     vector<Player> jucatori2;
-    Board table({new Effect(),new Property(1,100,50,1,{10,20,30,40,50,600})});
-    Board table2({new Effect(),new Effect(1)});
-    jucatori.emplace_back(1,500,1);
-    jucatori.emplace_back(2,500,0);
-    jucatori2.emplace_back(1,500,1);
-    jucatori2.emplace_back(2,500,0);
-
+    Board table({new Effect(), new Property(1, 100, 50, 1, {10, 20, 30, 40, 50, 600})});
+    Board table2({new Effect(), new Effect(1)});
+    jucatori.emplace_back(1, 500, 1);
+    jucatori.emplace_back(2, 500, 0);
+    jucatori2.emplace_back(1, 500, 1);
+    jucatori2.emplace_back(2, 500, 0);
 
     //COD TEST
 
-    for(Player i:jucatori2)
-        {
-            Effect *e;
-            e = dynamic_cast<Effect*>(table2[i.position()]);
-           if(e)
-               i.do_effect(*e,table2);
-           i.buy(table2);
+    for (Player i: jucatori2) {
+        Effect *e;
+        e = dynamic_cast<Effect *>(table2[i.position()]);
+        if (e)
+            i.do_effect(*e, table2);
+        i.buy(table2);
             cout<<i<<endl; 
         }
 
