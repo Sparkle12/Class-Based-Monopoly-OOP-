@@ -199,6 +199,7 @@ public:
                     throw string("cast not succesful");
             }
             catch (string &s) {
+                cout << s << endl;
                 try {
                     Effect *e = dynamic_cast<Effect *>(i);
                     if (e) {
@@ -231,6 +232,7 @@ public:
             }
             catch (string &s) {
                 try {
+                    cout << s << endl;
                     Effect *e = dynamic_cast<Effect *>(i);
                     if (e) {
                         tabla.emplace_back(new Effect(*e));
