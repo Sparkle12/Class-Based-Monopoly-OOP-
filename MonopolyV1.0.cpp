@@ -198,7 +198,7 @@ public:
                 } else
                     throw string("cast not succesful");
             }
-            catch (string s) {
+            catch (string &s) {
                 try {
                     Effect *e = dynamic_cast<Effect *>(i);
                     if (e) {
@@ -206,8 +206,8 @@ public:
                     } else
                         throw string("idk how you did this");
                 }
-                catch (string s) {
-                    cout << s << endl;
+                catch (string &s1) {
+                    cout << s1 << endl;
                 }
 
             }
@@ -229,7 +229,7 @@ public:
                 } else
                     throw string("cast not succesful");
             }
-            catch (string s) {
+            catch (string &s) {
                 try {
                     Effect *e = dynamic_cast<Effect *>(i);
                     if (e) {
@@ -237,8 +237,8 @@ public:
                     } else
                         throw string("idk how you did this");
                 }
-                catch (string s) {
-                    cout << s << endl;
+                catch (string &s1) {
+                    cout << s1 << endl;
                 }
 
             }
