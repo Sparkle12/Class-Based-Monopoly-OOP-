@@ -146,6 +146,7 @@ class Effect:public Square
     
     explicit Effect(int effect_id = 0):effect_id(effect_id){}
 
+    Effect(const Effect &e) : effect_id(e.effect_id) {}
 
     friend ostream& operator<<(ostream& out,const Effect& ef)
     {
@@ -188,24 +189,68 @@ public:
     explicit Board(vector<Square *> t)
             : tabla(std::move(t)) {}
 
-    Board(Board &b) : tabla(std::move(b.tabla)) {}
+    Board(const Board &b) {
+        for (Square *i: b.tabla) {
+            try {
+                Property *p = dynamic_cast<Property *>(i);
+                if (p) {
+                    tabla.emplace_back(new Property(*p));
+                } else
+                    throw string("cast not succesful");
+            }
+            catch (string s) {
+                try {
+                    Effect *e = dynamic_cast<Effect *>(i);
+                    if (e) {
+                        tabla.emplace_back(new Effect(*e));
+                    } else
+                        throw string("idk how you did this");
+                }
+                catch (string s) {
+                    cout << s << endl;
+                }
 
-    ~Board()
-    {
-        for(auto i : tabla)
+            }
+        }
+    }
+
+    ~Board() {
+        for (auto i: tabla)
             delete i;
 
     }
 
-    Board &operator=(const Board &b) = default;
+    Board &operator=(const Board &b) {
+        for (Square *i: b.tabla) {
+            try {
+                Property *p = dynamic_cast<Property *>(i);
+                if (p) {
+                    tabla.emplace_back(new Property(*p));
+                } else
+                    throw string("cast not succesful");
+            }
+            catch (string s) {
+                try {
+                    Effect *e = dynamic_cast<Effect *>(i);
+                    if (e) {
+                        tabla.emplace_back(new Effect(*e));
+                    } else
+                        throw string("idk how you did this");
+                }
+                catch (string s) {
+                    cout << s << endl;
+                }
 
-    friend ostream& operator<<(ostream& out,const Board& b)
-    {
+            }
+        }
+        return *this;
+    }
 
-        Effect* e;
-        for(auto i : b.tabla)
-        {
-            Property* p;
+    friend ostream &operator<<(ostream &out, const Board &b) {
+
+        Effect *e;
+        for (auto i: b.tabla) {
+            Property *p;
             if ((p = dynamic_cast<Property *>(i))) {
                 out << *p << endl;
             } else {
@@ -252,9 +297,34 @@ public:
                                                                                                                   std::move(
                                                                                                                           proprietati)) {}
 
-    Player(const Player &p) = default;
+    Player(const Player &p) {
+        if (this != &p) {
+            this->pozitie = p.pozitie;
+            this->player_id = p.player_id;
+            this->money = p.money;
 
-    Player &operator=(const Player &p) = default;
+            for (Property *i: p.proprietati) {
+                this->proprietati.emplace_back(new Property(*i));
+            }
+
+        }
+
+    }
+
+    Player &operator=(const Player &p) {
+        if (this != &p) {
+            this->pozitie = p.pozitie;
+            this->player_id = p.player_id;
+            this->money = p.money;
+
+            for (Property *i: p.proprietati) {
+                this->proprietati.emplace_back(new Property(*i));
+            }
+
+        }
+        return *this;
+    }
+
 
     friend ostream &operator<<(ostream &out, const Player &p) {
         out << "{" << p.player_id << "," << p.money << "," << p.pozitie << ",[";
