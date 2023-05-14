@@ -1,9 +1,8 @@
-# OOP Template
+# Monopoly
 
-### Tema 0
 
-- [ ] Nume proiect (poate fi schimbat ulterior)
-- [ ] Scurtă descriere a temei alese, ce v-ați propus să implementați
+- [ ] Monopoly
+- [ ] Obiectivul proiectului este de a implementa mecanismele de baza ale unui joc de Monopoly precum: miscat pe tabla, achizitionat de proprietati, inchisoare, platit chirie, achizitionare de case, trading cat si creearea unei interfete grafice in SFML.
 
 ## Tema 1
 
