@@ -3,6 +3,7 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <string>
 using namespace std;
 
 
@@ -250,8 +251,8 @@ public:
     friend ostream &operator<<(ostream &out, const Board &b) {
 
         Effect *e;
-        Property *p;
         for (auto i: b.tabla) {
+            Property *p;
             if ((p = dynamic_cast<Property *>(i))) {
                 out << *p << endl;
             } else {
