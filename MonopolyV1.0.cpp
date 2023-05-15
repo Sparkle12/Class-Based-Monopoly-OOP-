@@ -45,14 +45,13 @@ class Property: public Square
 
     friend ostream& operator<<(ostream& out,const Property& sq)
     {
-        out<<"["<<sq.color<<","<<sq.prop_price<<","<<sq.house_price<<","<<sq.id_proprietar<<","<<sq.nr_case<<",[";
-        for(int i =0;i<6;i++)
-            if(i != 5)
-                out<<sq.rent[i]<<",";
-            else
-                out<<sq.rent[i]<<"]";
-        out<<"]";
-        
+        out << "Color id: " << sq.color << endl;
+        out << "Property price: " << sq.prop_price << endl;
+        out << "Price for a house: " << sq.house_price << endl;
+        out << "Owner id: " << sq.id_proprietar << endl;
+        out << "Number of houses: " << sq.nr_case << endl;
+        for (int i = 0; i < 6; i++)
+            out << "Rent for " + to_string(i) + " houses: " << sq.rent[i] << endl;
         return out;
     }
 
@@ -150,7 +149,7 @@ class Effect:public Square
 
     friend ostream& operator<<(ostream& out,const Effect& ef)
     {
-        out<<ef.effect_id;
+        out << "Effect id: " << ef.effect_id << endl;
         return out;
     }
     
@@ -251,8 +250,8 @@ public:
     friend ostream &operator<<(ostream &out, const Board &b) {
 
         Effect *e;
+        Property *p;
         for (auto i: b.tabla) {
-            Property *p;
             if ((p = dynamic_cast<Property *>(i))) {
                 out << *p << endl;
             } else {
@@ -329,10 +328,11 @@ public:
 
 
     friend ostream &operator<<(ostream &out, const Player &p) {
-        out << "{" << p.player_id << "," << p.money << "," << p.pozitie << ",[";
+        out << "Player id: " << p.player_id << endl;
+        out << "Money amount: " << p.money << endl;
+        out << "Player positon on the board: " << p.pozitie << endl;
         for (const Property *i: p.proprietati)
-            out << *i << " ";
-        out << "]}";
+            out << *i << endl;
         return out;
     }
 
