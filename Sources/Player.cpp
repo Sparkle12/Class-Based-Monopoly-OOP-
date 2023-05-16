@@ -164,6 +164,6 @@ void Player::set_charges(int x) {
     charges = x;
 }
 
-int Player::get_charges() {
+int Player::get_charges() const {
     return charges;
 }

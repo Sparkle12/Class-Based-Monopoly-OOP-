@@ -67,15 +67,16 @@ public:
 
     [[maybe_unused]] virtual void do_ability() {}
 
-    [[maybe_unused]] virtual void do_ability_targeted(Player *target) {}
+    [[maybe_unused]] virtual void do_ability_targeted([[maybe_unused]] Player *target) {}
 
-    [[maybe_unused]] virtual void do_ability_on_board(const Board &b) {}
+    [[maybe_unused]] virtual void do_ability_on_board([[maybe_unused]]  Board &b) {}
 
-    [[maybe_unused]] virtual void do_ability_on_board_targeted(Player *target, Board &b) {}
+    [[maybe_unused]] virtual void
+    do_ability_on_board_targeted([[maybe_unused]] Player *target, [[maybe_unused]] Board &b) {}
 
-    void set_charges(int x);
+    [[maybe_unused]] void set_charges(int x);
 
-    int get_charges();
+    [[maybe_unused]] int get_charges() const;
 
 };
 

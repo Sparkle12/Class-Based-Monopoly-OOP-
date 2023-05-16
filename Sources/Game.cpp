@@ -66,11 +66,11 @@ Game::Game() {
 void Game::play(sf::RenderWindow &window) {
     int end_turn = 0, rolled = 0, in_buy_house_menu = 0;
     Animation idle(0, 3, 0.3f);
-    float deltaTime = 0.0f;
+
     sf::Clock clock;
 
     while (window.isOpen()) {
-        deltaTime = clock.restart().asSeconds();
+        float deltaTime = clock.restart().asSeconds();
         sf::Event event{};
         money.setString(std::to_string(jucatori[0]->getMoney()) + "$");
         money.setPosition(20, 20);
