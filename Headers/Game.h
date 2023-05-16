@@ -47,7 +47,7 @@ public:
 
     Game();
 
-    [[maybe_unused]] Game(std::vector<Player *> players, const Board &b = defaultBoard);
+    [[maybe_unused]] explicit Game(std::vector<Player *> players, const Board &b = defaultBoard);
 
 
     void play(sf::RenderWindow &window);
