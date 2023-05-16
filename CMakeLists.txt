@@ -93,7 +93,8 @@ endif()
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
-add_executable(${PROJECT_NAME} MonopolyV1.0.cpp)
+add_executable(${PROJECT_NAME} MonopolyV2.0.cpp Sources/Player.cpp Headers/Player.h Sources/Square.cpp Headers/Square.h Sources/Property.cpp Headers/Property.h Sources/Effect.cpp Headers/Effect.h Sources/Board.cpp Headers/Board.h Sources/Button.cpp Headers/Button.h Sources/Animation.cpp Headers/Animation.h Sources/PropSelectMenu.cpp Headers/PropSelectMenu.h Sources/Game.cpp Headers/Game.h Sources/Exceptions.cpp Headers/Exceptions.h Sources/PlayerClasess.cpp Headers/PlayerClasess.h)
+
 
 ###############################################################################
 
