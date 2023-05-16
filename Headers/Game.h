@@ -27,8 +27,8 @@ class Game {
                                               "Textures/buy-house-nohover.png",
                                               "Textures/endturn-button-hover.png",
                                               "Textures/endturn-button-nohover.png",
-                                              "Textures/cant-buy-button-hover.png",
-                                              "Textures/cant-buy-button-nohover.png"
+                                              "Textures/ability-button-hover.png",
+                                              "Textures/ability-button-nohover.png"
     };
     std::vector<sf::Vector2f> pozitii = {sf::Vector2f(100, 600),
                                          sf::Vector2f(1300, 600),
