@@ -17,19 +17,7 @@
 class Game {
     std::vector<Player *> jucatori = {new Banker(1, 500, 0), new Banker(2, 500, 0)};
     static Board defaultBoard;
-    std::vector<std::string> texture_paths = {"Textures/dice-roll-hover.png",
-                                              "Textures/dice-roll-nohover.png",
-                                              "Textures/buy-button-hover.png",
-                                              "Textures/buy-button-nohover.png",
-                                              "Textures/cant-buy-button-hover.png",
-                                              "Textures/cant-buy-button-nohover.png",
-                                              "Textures/buy-house-hover.png",
-                                              "Textures/buy-house-nohover.png",
-                                              "Textures/endturn-button-hover.png",
-                                              "Textures/endturn-button-nohover.png",
-                                              "Textures/ability-button-hover.png",
-                                              "Textures/ability-button-nohover.png"
-    };
+    static const std::vector<std::string> texture_paths;
     std::vector<sf::Vector2f> pozitii = {sf::Vector2f(100, 600),
                                          sf::Vector2f(1300, 600),
                                          sf::Vector2f(1300, 600),

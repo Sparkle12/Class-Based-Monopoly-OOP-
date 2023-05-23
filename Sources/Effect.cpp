@@ -52,3 +52,7 @@ sf::Sprite Effect::getSprite() {
 [[nodiscard]] int Effect::is_buyable() {
     return 0;
 }
+
+Square *Effect::clone() const {
+    return new Effect(*this);
+}

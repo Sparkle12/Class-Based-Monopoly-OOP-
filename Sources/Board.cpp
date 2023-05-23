@@ -15,25 +15,40 @@ Board::Board() {
 }
 
 
-Board::Board(const Board &b) : sprites(b.sprites) {
+[[maybe_unused]] Board::Board(const Board &b) : sprites(b.sprites), indici(b.indici), font(b.font) {
+
+    std::vector<Square *> temp;
+
     for (Square *i: b.tabla) {
 
-        auto *p = dynamic_cast<Property *>(i);
-        if (p) {
-            tabla.emplace_back(new Property(*p));
-        } else {
-            auto *e = dynamic_cast<Effect *>(i);
-            if (e)
-                tabla.emplace_back(new Effect(*e));
-        }
-
+        temp.emplace_back(i->clone());
     }
+
+    tabla = temp;
 }
 
 Board::~Board() {
     for (Square *i: tabla)
         delete i;
 
+}
+
+Board &Board::operator=(const Board &b) {
+    int count = 1;
+    std::vector<Square *> temp;
+    std::vector<sf::Sprite> temp2;
+    std::vector<sf::Text> temp3;
+    for (Square *i: b.tabla) {
+        temp.emplace_back(i->clone());
+        temp2.emplace_back(i->getSprite());
+        temp3.emplace_back(std::to_string(count), font, 36);
+        count++;
+    }
+    tabla = temp;
+    sprites = temp2;
+    font = b.font;
+    indici = temp3;
+    return *this;
 }
 
 //Board &operator=(const Board &b) = default;
@@ -64,6 +79,7 @@ Square *Board::operator[](int i) {
 
 
 int Board::size() {
+    std::cout << tabla.size() << std::endl;
     //RETURNEAZA NUMARUL DE PATRATE DIN TABLA
     return int(tabla.size());
 }
@@ -99,3 +115,5 @@ void Board::updateIndici() {
     }
 
 }
+
+Board::Board(const std::vector<Square *> &tabla) : tabla(tabla) {}

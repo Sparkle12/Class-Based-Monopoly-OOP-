@@ -17,6 +17,8 @@ public:
 
     virtual int is_buyable() = 0;
 
+    virtual Square *clone() const = 0;
+
     virtual ~Square() = default;
 };
 

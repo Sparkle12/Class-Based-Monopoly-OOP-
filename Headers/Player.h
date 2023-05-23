@@ -30,9 +30,11 @@ public:
     Player(const Player &p);
 
 
+    Player &operator=(const Player &p);
+
     //friend std::ostream &operator<<(std::ostream &out, const Player &p);
 
-
+    virtual ~Player();
 
     Property *operator[](int i);
 

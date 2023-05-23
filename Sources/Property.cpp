@@ -105,3 +105,7 @@ sf::Sprite Property::getSprite() {
     else
         return 0;
 }
+
+Square *Property::clone() const {
+    return new Property(*this);
+}

@@ -5,7 +5,7 @@
 #ifndef OOP_ANIMATION_H
 #define OOP_ANIMATION_H
 
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
 #include <iostream>
 
 class Animation {

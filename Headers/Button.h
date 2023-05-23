@@ -19,6 +19,7 @@ public:
 
     Button(sf::Sprite hover, sf::Sprite nohover, sf::Vector2f pos);
 
+    Button &operator=(const Button &bt);
 
     Button(const Button &bt);
 

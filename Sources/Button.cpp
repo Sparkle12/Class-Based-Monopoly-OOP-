@@ -13,6 +13,12 @@ Button::Button(sf::Sprite hover, sf::Sprite nohover, sf::Vector2f pos) : Hover(s
 Button::Button(const Button &bt) : Hover(bt.Hover), noHover(bt.noHover), curentSprite(&noHover),
                                    position(bt.position) {}
 
+Button &Button::operator=(const Button &bt) {
+    Hover = bt.Hover;
+    noHover = bt.noHover;
+    curentSprite = &noHover;
+    position = bt.position;
+}
 
 bool Button::isHovered(sf::RenderWindow &gameInstance) {
     if (float(sf::Mouse::getPosition(gameInstance).x) > curentSprite->getGlobalBounds().left &&

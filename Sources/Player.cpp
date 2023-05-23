@@ -24,6 +24,27 @@ Player::Player(const Player &p) {
 
 }
 
+Player &Player::operator=(const Player &p) {
+
+    pozitie = p.pozitie;
+    money = p.money;
+    player_id = p.player_id;
+    texture = p.texture;
+    charges = p.charges;
+
+    for (Property *i: p.proprietati) {
+        proprietati.emplace_back(new Property(*i));
+    }
+
+    return *this;
+}
+
+Player::~Player() {
+    for (Property *i: proprietati) {
+        i = nullptr;
+        delete i;
+    }
+}
 
 Property *Player::operator[](int i) {
     //RETURNEAZA POINTER-UL SPRE PROPRIETATEA DE PE POZITIA I DIN VECTORUL PROPRIETATI
@@ -33,11 +54,14 @@ Property *Player::operator[](int i) {
 void Player::move(Board &b, int step) {
     //SIMULEAZA 2 ARUNCARI DE ZAR CU 6 FETE SI MUTA JUCATORUL SUMA CELOR 2 ARUNCARI PATRATE AVAND GRIJA SA RAMANA PE TABLA
     if (!step) {
+        std::cout << "here" << std::endl;
         int s = 0;
         for (int i = 0; i < 2; i++)
             s += (1 + (rand() % 6));
+        std::cout << "here" << std::endl;
         if (pozitie + s >= b.size())
             this->add_money(100);
+        std::cout << "here" << std::endl;
         pozitie = (pozitie + s) % b.size();
     } else {
         if (pozitie + step >= b.size())
@@ -167,3 +191,7 @@ void Player::set_charges(int x) {
 int Player::get_charges() const {
     return charges;
 }
+
+
+
+

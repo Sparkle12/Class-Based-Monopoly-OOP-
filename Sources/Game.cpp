@@ -43,7 +43,6 @@ Game::Game() {
     money.setFont(font);
     money.setCharacterSize(36);
     money.setFillColor(sf::Color::White);
-
     for (const std::string &path: texture_paths) {
         sf::Texture temp;
         temp.loadFromFile(path);
@@ -66,7 +65,6 @@ Game::Game() {
 void Game::play(sf::RenderWindow &window) {
     int end_turn = 0, rolled = 0, in_buy_house_menu = 0;
     Animation idle(0, 3, 0.3f);
-
     sf::Clock clock;
 
     while (window.isOpen()) {
@@ -89,7 +87,7 @@ void Game::play(sf::RenderWindow &window) {
                         try {
                             jucatori[0]->buy_house((*jucatori[0])[i]);
                         }
-                        catch (gameErrors &error) {
+                        catch (game_error &error) {
                             std::cout << error.what() << std::endl;
                         }
 
@@ -103,7 +101,6 @@ void Game::play(sf::RenderWindow &window) {
 
         } else {
             idle.Update(deltaTime);
-
 
             window.clear(sf::Color::Green);
 
@@ -142,7 +139,9 @@ void Game::play(sf::RenderWindow &window) {
 
                 if (butoane[0].checkClick(window) && !rolled) {
                     rolled = 1;
+                    std::cout << "here" << std::endl;
                     jucatori[0]->move(defaultBoard);
+                    std::cout << "here" << std::endl;
                     if (!(defaultBoard[jucatori[0]->position()]->is_buyable())) {
 
                         auto *p = dynamic_cast<Property *>(defaultBoard[jucatori[0]->position()]);
@@ -163,7 +162,7 @@ void Game::play(sf::RenderWindow &window) {
                     try {
                         jucatori[0]->buy(defaultBoard);
                     }
-                    catch (gameErrors &error) {
+                    catch (game_error &error) {
                         std::cout << error.what() << std::endl;
                     }
                     //std::cout<<jucatori[0]<<std::endl;
@@ -181,7 +180,7 @@ void Game::play(sf::RenderWindow &window) {
                         jucatori[0]->do_ability_on_board(defaultBoard);
                         jucatori[0]->do_ability_on_board_targeted(jucatori[1], defaultBoard);
                     }
-                    catch (gameErrors &err) {
+                    catch (game_error &err) {
                         std::cout << err.what() << std::endl;
                     }
                 }
@@ -212,7 +211,7 @@ void Game::play(sf::RenderWindow &window) {
                     try {
                         jucatori[i]->buy(defaultBoard);
                     }
-                    catch (gameErrors &error) {
+                    catch (game_error &error) {
                         std::cout << error.what() << std::endl;
                     }
 
@@ -244,3 +243,17 @@ void Game::play(sf::RenderWindow &window) {
 
 
 }
+
+const std::vector<std::string> Game::texture_paths = {"Textures/dice-roll-hover.png",
+                                                      "Textures/dice-roll-nohover.png",
+                                                      "Textures/buy-button-hover.png",
+                                                      "Textures/buy-button-nohover.png",
+                                                      "Textures/cant-buy-button-hover.png",
+                                                      "Textures/cant-buy-button-nohover.png",
+                                                      "Textures/buy-house-hover.png",
+                                                      "Textures/buy-house-nohover.png",
+                                                      "Textures/endturn-button-hover.png",
+                                                      "Textures/endturn-button-nohover.png",
+                                                      "Textures/ability-button-hover.png",
+                                                      "Textures/ability-button-nohover.png"
+};

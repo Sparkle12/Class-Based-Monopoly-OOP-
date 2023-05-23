@@ -38,12 +38,14 @@ public:
 
     Board();
 
+    explicit Board(const std::vector<Square *> &tabla);
 
-    Board(const Board &b);
+
+    [[maybe_unused]] Board(const Board &b);
 
     ~Board();
 
-    Board &operator=(const Board &b) = default;
+    Board &operator=(const Board &b);
 
     //friend ostream& operator<<(ostream& out,const Board& b);
 

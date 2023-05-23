@@ -7,33 +7,33 @@
 
 #include <iostream>
 
-class gameErrors : public std::logic_error {
+class game_error : public std::logic_error {
 public:
 
-    explicit gameErrors(const char *exp);
+    explicit game_error(const char *exp);
 
 };
 
-class not_enough_money : public gameErrors {
+class not_enough_money : public game_error {
 
 public:
     explicit not_enough_money(const char *exp = "not enough money");
 
 };
 
-class max_no_houses : public gameErrors {
+class max_no_houses : public game_error {
 
 public:
     explicit max_no_houses(const char *exp = "allready at 5 houses");
 };
 
-class owned : public gameErrors {
+class owned : public game_error {
 public:
     explicit owned(const char *exp = "allready has an owner");
 
 };
 
-class out_of_charges : public gameErrors {
+class out_of_charges : public game_error {
 public:
     explicit out_of_charges(const char *exp = "no more ability charges");
 };

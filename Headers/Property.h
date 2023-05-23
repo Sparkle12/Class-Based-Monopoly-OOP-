@@ -63,6 +63,8 @@ public:
     sf::Sprite getSprite() override;
 
     [[nodiscard]] int is_buyable() override;
+
+    Square *clone() const override;
 };
 
 
