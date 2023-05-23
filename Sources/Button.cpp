@@ -18,6 +18,8 @@ Button &Button::operator=(const Button &bt) {
     noHover = bt.noHover;
     curentSprite = &noHover;
     position = bt.position;
+
+    return *this;
 }
 
 bool Button::isHovered(sf::RenderWindow &gameInstance) {
