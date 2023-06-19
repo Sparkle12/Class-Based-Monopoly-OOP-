@@ -232,13 +232,6 @@ public:
         return rate;
     }
 
-    [[nodiscard]] [[maybe_unused]] int getGoldCost() const {
-        return gold_cost;
-    }
-
-    [[maybe_unused]] [[nodiscard]] int getFoodCost() const {
-        return food_cost;
-    }
 };
 
 class Research {
