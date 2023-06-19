@@ -258,11 +258,7 @@ public:
         return Upgrade();
     }
 
-    [[maybe_unused]] void printUpgrades() {
-        for (auto &upgrade: upgrades) {
-            cout << upgrade.getName() << endl;
-        }
-    }
+
 };
 
 
@@ -275,8 +271,6 @@ class Villiage {
     vector<Lumberjack> lemnari;
     vector<Swordsman> baieti_cu_sabii;
     vector<Archer> arcasii;
-    [[maybe_unused]] TownCenter baza;
-    [[maybe_unused]] Barracks baraca;
     Research cercetare;
     double gold, food, wood;
 
@@ -370,7 +364,7 @@ public:
         }
     }
 
-    void Research(const string &name) {
+    void res(const string &name) {
         upgradeUnits(cercetare.research(name));
     }
 
@@ -468,6 +462,7 @@ U makeHero(U target) {
     target.setAttack(target.getAttack() + 5);
     target.setHealth(target.getHealth() + 10);
     target.setArmor(target.getArmor() + 2);
+    target.setRange(target.getRange() + 1);
     return target;
 }
 
@@ -479,8 +474,9 @@ int main() {
     baiat_cu_sabie = makeHero(baiat_cu_sabie);
     arcas = makeHero(arcas);
 
-    cout << arcas.getAttack() << endl;
-    cout << baiat_cu_sabie.getAttack() << endl;
+    cout << arcas.getAttack() << " " << arcas.getRange() << endl;
+    cout << baiat_cu_sabie.getAttack() << " " << baiat_cu_sabie.getRange() << endl;
+
 
     cout << "Test makeHero end" << endl << endl;
 
@@ -501,6 +497,9 @@ int main() {
     cout << "Test joinVilliage end" << endl << endl;
 
     cout << "Test unit creation start" << endl;
+    v1.createLumberjack();
+    v1.createFarmer();
+    v1.createMiner();
     v2.createArcher();
     v2.createArcher();
     v2.createArcher();
@@ -539,8 +538,8 @@ int main() {
 
     cout << "Test research start" << endl;
 
-    v2.Research("Sharp Swords");
-    v2.Research("Sharp arrows");
+    v2.res("Sharp Swords");
+    v2.res("Sharp arrows");
     cout << "Test research end" << endl << endl;
 
 
