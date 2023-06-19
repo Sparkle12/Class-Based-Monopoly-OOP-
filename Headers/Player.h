@@ -67,14 +67,8 @@ public:
 
     int getMoney() const;
 
-    [[maybe_unused]] virtual void do_ability() {}
-
-    [[maybe_unused]] virtual void do_ability_targeted([[maybe_unused]] Player *target) {}
-
-    [[maybe_unused]] virtual void do_ability_on_board([[maybe_unused]]  Board &b) {}
-
     [[maybe_unused]] virtual void
-    do_ability_on_board_targeted([[maybe_unused]] Player *target, [[maybe_unused]] Board &b) {}
+    do_ability_on_board_targeted([[maybe_unused]] Player *target, [[maybe_unused]] Board &b) = 0;
 
     [[maybe_unused]] void set_charges(int x);
 

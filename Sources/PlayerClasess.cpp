@@ -1,10 +1,9 @@
 //
 // Created by Adi on 5/16/2023.
 //
-
 #include "../Headers/PlayerClasess.h"
 
-void Banker::do_ability() {
+void Banker::do_ability_on_board_targeted(Player target, Board b) {
     if (this->get_charges()) {
         this->add_money(200);
         this->set_charges(this->get_charges() - 1);
@@ -19,7 +18,7 @@ Banker::Banker(int playerId, int money, int poz, const std::vector<Property *> &
         poz,
         proprietati) { this->set_charges(charges); }
 
-void Thief::do_ability_targeted(Player *target) {
+void Thief::do_ability_on_board_targeted(Player *target, Board b) {
     if (this->get_charges()) {
         this->add_money(100);
         target->add_money(-100);

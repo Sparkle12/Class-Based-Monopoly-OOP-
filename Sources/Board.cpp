@@ -44,7 +44,7 @@ Board &Board::operator=(const Board &b) {
         temp3.emplace_back(std::to_string(count), font, 36);
         count++;
     }
-    tabla = temp;
+    tabla.swap(temp);
     sprites = temp2;
     font = b.font;
     indici = temp3;

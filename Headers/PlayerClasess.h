@@ -12,7 +12,7 @@ public:
 
     Banker(int playerId, int money, int poz, const std::vector<Property *> &proprietati = {}, int charges = 1);
 
-    void do_ability() override;
+    void do_ability_on_board_targeted(Player target, Board b) override;
 
 };
 
@@ -22,7 +22,7 @@ public:
 
     Thief(int playerId, int money, int poz, const std::vector<Property *> &proprietati = {}, int charges = 1);
 
-    void do_ability_targeted(Player *target) override;
+    void do_ability_on_board_targeted(Player *target, Board b) override;
 
 };
 

@@ -21,10 +21,11 @@ set(debug_mode "$<OR:${is_debug},${is_rel_with_deb}>")
 # custom functions
 
 function(set_custom_stdlib_and_sanitizers target add_apple_asan)
-    if(MSVC)
-        target_compile_options(${target} PRIVATE "$<${debug_mode}:/fsanitize=address>")
+    if (MSVC)
+        set_target_properties(${target} PROPERTIES VS_USER_PROPS "${CMAKE_SOURCE_DIR}/disable_modules.props")
+        target_compile_options(${target} PRIVATE "$<${debug_mode}:/fsanitize=address>" /experimental:module-)
         return()
-    endif()
+    endif ()
 
     if("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
         target_compile_options(${target} PRIVATE -stdlib=libc++)
@@ -93,7 +94,7 @@ endif()
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
-add_executable(${PROJECT_NAME} MonopolyV2.0.cpp Sources/Player.cpp Headers/Player.h Sources/Square.cpp Headers/Square.h Sources/Property.cpp Headers/Property.h Sources/Effect.cpp Headers/Effect.h Sources/Board.cpp Headers/Board.h Sources/Button.cpp Headers/Button.h Sources/Animation.cpp Headers/Animation.h Sources/PropSelectMenu.cpp Headers/PropSelectMenu.h Sources/Game.cpp Headers/Game.h Sources/Exceptions.cpp Headers/Exceptions.h Sources/PlayerClasess.cpp Headers/PlayerClasess.h)
+add_executable(${PROJECT_NAME} tema3.cpp)
 
 
 ###############################################################################
