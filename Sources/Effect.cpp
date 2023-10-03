@@ -9,30 +9,16 @@ Effect::Effect(int effect_id) : effect_id(effect_id) {}
 
 Effect::Effect(const Effect &e) : effect_id(e.effect_id) {}
 
-/*
-friend ostream& operator<<(ostream& out,const Effect& ef)
-{
-    out<<ef.effect_id;
-    return out;
-}
-
-
-friend istream& operator>>(istream& in,Effect& ef)
-{
-    in>>ef.effect_id;
-    return in;
-}
-*/
-
 Effect &Effect::operator=(const Effect &ef) {
     effect_id = ef.effect_id;
     return *this;
 }
-
+/// Returns the effect_id
 [[nodiscard]] int Effect::id_effect() const {
     return effect_id;
 }
 
+/// Returns the sprite of the tile based on effect_id
 sf::Sprite Effect::getSprite() {
     switch (effect_id) {
 
@@ -49,10 +35,12 @@ sf::Sprite Effect::getSprite() {
     return sf::Sprite(texture);
 }
 
+/// Allways returns 0 as Effect tiles are not buyable by default
 [[nodiscard]] int Effect::is_buyable() {
     return 0;
 }
 
+/// Clones the Effect tile it called on
 Square *Effect::clone() const {
     return new Effect(*this);
 }

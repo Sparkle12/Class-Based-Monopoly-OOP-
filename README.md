@@ -1,57 +1,25 @@
 # Monopoly
 
 
-- [ ] Monopoly
-- [ ] Obiectivul proiectului este de a implementa mecanismele de baza ale unui joc de Monopoly precum: miscat pe tabla, achizitionat de proprietati, inchisoare, platit chirie, achizitionare de case, trading cat si creearea unei interfete grafice in SFML.
+- [ ] Class based Monopoly-like game made in C++ using SFML to create the visual interface.
+- [ ] In it's current state the game is played as a 1v1 against a bot. All the usual Monopoly activities are possible
+  like buying properties, building houses, paying rent if you land on an owned property, chance, luxury tax and others.
+- [ ] The behavior of the bot is quite simple, it buys any property it can.
+- [ ] There are 3 available classes right now: Banker, Thief and Mage. Each one of them having a unique ability to use
+  throughout the game
+- [ ] The abilities are as follows:
+- The Banker gains 200$ (can be used once per game).
+- The Thief steals 100$ from the bot (can be used once per game).
+- The Mage moves the bot 2 tiles behind (can be used 3 times per game).
+- [ ] Sadly the only way to change you class is directly in the code, the default class being the Banker.
 
-## Tema 1
+## Photos
 
-#### Cerințe
-- [ ] definirea a minim 3-4 clase folosind compunere
-- [ ] constructori de inițializare
-- [ ] pentru o clasă: constructor de copiere, `operator=` de copiere, destructor
-<!-- - [ ] pentru o altă clasă: constructor de mutare, `operator=` de mutare, destructor -->
-<!-- - [ ] pentru o altă clasă: toate cele 5 funcții membru speciale -->
-- [ ] `operator<<` pentru toate clasele pentru afișare (std::ostream)
-- [ ] cât mai multe `const` (unde este cazul)
-- [ ] implementarea a minim 3 funcții membru publice pentru funcționalități specifice temei alese
-- [ ] scenariu de utilizare a claselor definite:
-  - crearea de obiecte și apelarea funcțiilor membru publice în main
-  - vor fi adăugate în fișierul `tastatura.txt` exemple de date de intrare de la tastatură (dacă există)
-- [ ] tag de `git`: de exemplu `v0.1`
-- [ ] serviciu de integrare continuă (CI); exemplu: GitHub Actions
+![Monopoly1.png](Photos%2FMonopoly1.png)
+![Monopoly2.png](Photos%2FMonopoly2.png)
 
-## Tema 2
-
-#### Cerințe
-- [ ] separarea codului din clase în `.h` (sau `.hpp`) și `.cpp`
-- [ ] moșteniri
-  - [ ] clasă cu atribut de tip pointer la o clasă de bază cu derivate
-  - [ ] funcții virtuale (pure) apelate prin pointeri de bază din clasa de mai sus, constructori virtuali (clone)
-    - minim o funcție virtuală va fi **specifică temei** (e.g. nu simple citiri/afișări)
-  - [ ] apelarea constructorului din clasa de bază din constructori din derivate
-  - [ ] smart pointers
-  - [ ] `dynamic_cast`
-- [ ] suprascris cc/op= pentru copieri/atribuiri corecte, copy and swap
-- [ ] excepții
-  - [ ] ierarhie proprie cu baza `std::exception` sau derivată din `std::exception`; minim 2 clase pentru erori specifice
-  - [ ] utilizare cu sens: de exemplu, `throw` în constructor, `try`/`catch` în `main`
-- [ ] funcții și atribute `static`
-- [ ] STL
-- [ ] cât mai multe `const`
-- [ ] la sfârșit: commit separat cu adăugarea unei noi derivate fără a modifica restul codului
-- [ ] tag de `git`: de exemplu `v0.2`
-
-## Tema 3
-
-#### Cerințe
-- [ ] 2 șabloane de proiectare (design patterns)
-- [ ] o funcție șablon (template) cu sens; minim 2 instanțieri
-- [ ] o clasă șablon cu sens; minim 2 instanțieri
-<!-- - [ ] o specializare pe funcție/clasă șablon -->
-- [ ] tag de `git`: de exemplu `v0.3` sau `v1.0`
-
-## Resurse
+## Resources
 
 - [SFML](https://github.com/SFML/SFML/tree/aa82ea132b9296a31922772027ad5d14c1fa381b) (Zlib)
-- adăugați trimiteri către resursele externe care v-au ajutat sau pe care le-ați folosit
+- [Dino Sprites](https://arks.itch.io/dino-characters)
+- [Board Textures](https://www.google.com/url?sa=i&url=https%3A%2F%2Fdepositphotos.com%2Fvectors%2Fmonopoly.html&psig=AOvVaw3Cs5TKcIBqmPQcdzVEQZ8z&ust=1696444862599000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCKjlz9zD2oEDFQAAAAAdAAAAABAG)

@@ -8,7 +8,8 @@
 #include "SFML/Graphics.hpp"
 
 class Square {
-    //CLASA SQUARE ESTE FACUTA PT A FI MOSTENITA DE PROPERTY SI EFFECT PENTRU A FACE POSIBILA MEMORAREA LOR INTR-UN SINGUR VECTOR CA Square*
+    /// Pure virtual class that is the parent class of the Property and Effect classes
+    /// Mostly used to be able to hold both Property and Effect objects in the same vector
 
 
 public:

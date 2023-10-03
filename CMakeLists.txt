@@ -94,7 +94,7 @@ endif()
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
-add_executable(${PROJECT_NAME} tema3.cpp)
+add_executable(${PROJECT_NAME} MonopolyV2.0.cpp Sources/PlayerClasess.cpp Sources/Property.cpp Sources/PropSelectMenu.cpp Sources/Square.cpp Sources/Animation.cpp Sources/Board.cpp Sources/Effect.cpp Sources/Exceptions.cpp Sources/Game.cpp Sources/Player.cpp Sources/Button.cpp)
 
 
 ###############################################################################

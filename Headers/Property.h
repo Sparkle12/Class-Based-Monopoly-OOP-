@@ -14,10 +14,11 @@
 #include "Square.h"
 
 class Property : public Square {
-    //PROPRIETATILE AU O CULOARE(APARTENENTA LA CARTIERE PE VIITOR),UN PRET DE ACHIZITIE,UN PRET PT CASE,UN ID DE PROPRIETAR SI UN VECTOR PT CHIRIILE PT FIECARE NUMAR DE CASE UNDE rent[nr_case] ESTE CHIRIA PT NUMARU ACELA DE CASE
 
     std::string color;
+
     int prop_price, house_price, id_proprietar, nr_case;
+
     sf::Texture texture;
 
     std::vector<int> rent;
@@ -26,45 +27,37 @@ class Property : public Square {
 public:
 
 
-    explicit Property(std::string color = "", int prop_price = 0, int house_price = 0, int id = 0,
-                      std::vector<int> rent = {0, 0, 0, 0, 0, 0}, int nr_case = 0);
+    explicit Property(std::string color = "",
+                      int prop_price = 0,
+                      int house_price = 0,
+                      int id = 0,
+                      std::vector<int> rent = {0, 0, 0, 0, 0, 0},
+                      int nr_case = 0);
 
     Property(const Property &p);
 
-    //friend std::ostream& operator<<(std::ostream& out,const Property& sq);
-
-
-
-    //friend std::istream& operator>>(std::istream& in, Property& sq);
-
-
-
     Property &operator=(const Property &other);
 
+    [[nodiscard]] int price() const;/// Returns the price to buy the property
 
-    [[nodiscard]] int price() const;
+    void set_prop(int id);/// Changes the owner of the property
 
+    [[nodiscard]] int id() const;/// Returns the id of the owner
 
-    void set_prop(int id);
+    [[nodiscard]] int houses() const;/// Returns the number of houses built on the property
 
+    int out_rent(int nr);/// Returns the rent amount if nr houses are built on the property
 
-    [[nodiscard]] int id() const;
+    [[nodiscard]] int out_house_price() const;/// Returns the price to build a house
 
+    void inc_houses();/// Increases the number of houses built on the property
 
-    [[nodiscard]] int houses() const;
+    sf::Sprite getSprite() override;/// Loads the coresponding texture and transforms it into a sprite returning it
 
+    [[nodiscard]] int
+    is_buyable() override;/// Returns if the property can be bougth (1 if it can be / 0 if it can't be)
 
-    int out_rent(int nr);
-
-    [[nodiscard]] int out_house_price() const;
-
-    void inc_houses();
-
-    sf::Sprite getSprite() override;
-
-    [[nodiscard]] int is_buyable() override;
-
-    Square *clone() const override;
+    Square *clone() const override;/// Returns a pointer to an identical property
 };
 
 

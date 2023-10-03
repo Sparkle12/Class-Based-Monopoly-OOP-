@@ -25,12 +25,16 @@ public:
 
     Button(Button &&bt) = default;
 
+    /// Takes the display window as a paramter and checks if the button is hovered returning true/false
     bool isHovered(sf::RenderWindow &gameInstance);
 
+    /// Takes the display window as a parameter and checks if the button is clicked returning true/false
     bool checkClick(sf::RenderWindow &window);
 
+    /// Takes the display window as a parameter and draws the button on the screen
     void drawButton(sf::RenderWindow &gameInstance);
 
+    /// Takes a Vector2f (a pair of floats) as paramater and changes the position of the button
     void setPos(sf::Vector2f poz);
 
 };

@@ -30,7 +30,16 @@ class Board {
                                    new Property("dark_blue", 100, 50, 0, {8, 25, 50, 250, 350, 450}),
                                    new Property("red", 100, 50, 0, {8, 25, 50, 250, 350, 550})
     };
+    /// The sprites for each tile
     std::vector<sf::Sprite> sprites;
+
+
+    /// Index of each tile in the form of text
+    /// They are displayed above each tile and are color coded
+    /// White means the tile is buyable
+    /// Yellow means the tile is an effect tile
+    /// Red means the tile is owned by a bot
+    /// Cyan means the tile is owned by the player
     std::vector<sf::Text> indici;
     sf::Font font;
 
@@ -47,19 +56,19 @@ public:
 
     Board &operator=(const Board &b);
 
-    //friend ostream& operator<<(ostream& out,const Board& b);
-
-
-
+    /// Takes and integer as a parameter and return the Square* at position i in the tabla vector
     Square *operator[](int i);
 
-
+    /// Returns the number of the tiles that make up the board
     int size();
 
+    /// Takes a render window as a parameter and draws the board and indexes on the screen
     void drawBoard(sf::RenderWindow &gameInstance);
 
+    /// Takes a integer as a parameter and return the sprite at position i in the sprites vector (it coresponds to tile at operator[](i))
     sf::Sprite get_sprite_at_position(int i);
 
+    /// Updates the color code of the indexes (See line 37 for more info)
     void updateIndici();
 
 
