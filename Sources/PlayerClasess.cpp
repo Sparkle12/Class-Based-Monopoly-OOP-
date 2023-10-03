@@ -4,7 +4,7 @@
 #include "../Headers/PlayerClasess.h"
 
 /// Banker class ability gives the player 200$ (1 chearge per game)
-void Banker::do_ability_on_board_targeted(Player *target, Board &b) {
+void Banker::do_ability_on_board_targeted([[maybe_unused]] Player *target, [[maybe_unused]] Board &b) {
 
     if (this->get_charges()) {
         this->add_money(200);
@@ -23,7 +23,7 @@ Banker::Banker(int playerId, int money, int poz, const std::vector<Property *> &
 }
 
 /// Thief class ability steals 100$ from another player (1 charge per game)
-void Thief::do_ability_on_board_targeted(Player *target, Board &b) {
+void Thief::do_ability_on_board_targeted(Player *target, [[maybe_unused]] Board &b) {
 
     if (this->get_charges()) {
         this->add_money(100);
