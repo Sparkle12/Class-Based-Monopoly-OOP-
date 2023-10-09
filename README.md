@@ -2,7 +2,7 @@
 
 
 - [ ] Class based Monopoly-like game made in C++ using SFML to create the visual interface.
-- [ ] In it's current state the game is played as a 1v1 against a bot. All the usual Monopoly activities are possible
+- [ ] In its current state the game is played as a 1v1 against a bot. All the usual Monopoly activities are possible
   like buying properties, building houses, paying rent if you land on an owned property, chance, luxury tax and others.
 - [ ] The behavior of the bot is quite simple, it buys any property it can.
 - [ ] There are 3 available classes right now: Banker, Thief and Mage. Each one of them having a unique ability to use
